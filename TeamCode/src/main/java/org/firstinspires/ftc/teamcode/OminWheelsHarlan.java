@@ -69,15 +69,23 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class OminWheels extends LinearOpMode {
 
     // Declare OpMode members for each of the 4 wheel motors, the two shoulder motors, the extender motors, and the hand servos.
+    
+    //Time
     private ElapsedTime runtime = new ElapsedTime();
+    
+    //Drive
     private DcMotor leftFrontDrive = null;
     private DcMotor leftBackDrive = null;
     private DcMotor rightFrontDrive = null;
     private DcMotor rightBackDrive = null;
+    
+    //Arms
     private DcMotor leftShoulder = null;
     private DcMotor leftExtender = null;
     private DcMotor rightShoulder = null;
     private DcMotor rightExtender = null;
+    
+    //Servos
     private Servo leftHand = null;
     private Servo rightHand = null;
 
@@ -86,14 +94,20 @@ public class OminWheels extends LinearOpMode {
 
         // Initialize the hardware variables. Note that the strings used here must correspond
         // to the names assigned during the robot configuration step on the DS or RC devices.
+        
+        //Drive
         leftFrontDrive  = hardwareMap.get(DcMotor.class, "left_front_drive");
         leftBackDrive  = hardwareMap.get(DcMotor.class, "left_back_drive");
         rightFrontDrive = hardwareMap.get(DcMotor.class, "right_front_drive");
         rightBackDrive = hardwareMap.get(DcMotor.class, "right_back_drive");
+        
+        //Arms
         leftShoulder = hardwareMap.get(DcMotor.class, "left_shoulder");
         leftExtender = hardwareMap.get(DcMotor.class, "left_extender");
         rightShoulder = hardwareMap.get(DcMotor.class, "right_shoulder");
         rightExtender = hardwareMap.get(DcMotor.class, "right_extender");
+        
+        //Servos
         leftHand = hardwareMap.get(Servo.class, "left_hand");
         rightHand = hardwareMap.get(Servo.class, "right_hand");
 
@@ -107,18 +121,24 @@ public class OminWheels extends LinearOpMode {
         // when you first test your robot, push the left joystick forward and observe the direction the wheels turn.
         // Reverse the direction (flip FORWARD <-> REVERSE ) of any wheel that runs backward
         // Keep testing until ALL the wheels move the robot forward when you push the left joystick forward.
+        
+        //Drive
         leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
         leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
         rightFrontDrive.setDirection(DcMotor.Direction.FORWARD);
         rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
+        
+        //Arms
         leftShoulder.setDirection(DcMotor.Direction.REVERSE);
         leftExtender.setDirection(DcMotor.Direction.REVERSE);
         rightShoulder.setDirection(DcMotor.Direction.FORWARD);
         rightExtender.setDirection(DcMotor.Direction.FORWARD);
-        leftHand.setDirection(DcMotor.Direction.REVERSE);
-        rightHand.setDirection(DcMotor.Direction.FORWARD);
+        
+        //Servos
+        leftHand.setDirection(Servo.Direction.REVERSE);
+        rightHand.setDirection(Servo.Direction.FORWARD);
 
-        // Servo stuff
+        // Servo variables
         Static final double INCREMENT = 0.0;
         Static final int CYCLEMS = 50;
         Static final double MAX_POS = 1.0;
