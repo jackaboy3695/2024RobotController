@@ -97,18 +97,18 @@ public class OminWheels extends LinearOpMode {
         
         //Drive
         leftFrontDrive  = hardwareMap.get(DcMotor.class, "left_front_drive");
-        leftBackDrive  = hardwareMap.get(DcMotor.class, "left_back_drive");
+        leftBackDrive   = hardwareMap.get(DcMotor.class, "left_back_drive");
         rightFrontDrive = hardwareMap.get(DcMotor.class, "right_front_drive");
-        rightBackDrive = hardwareMap.get(DcMotor.class, "right_back_drive");
+        rightBackDrive  = hardwareMap.get(DcMotor.class, "right_back_drive");
         
         //Arms
-        leftShoulder = hardwareMap.get(DcMotor.class, "left_shoulder");
-        leftExtender = hardwareMap.get(DcMotor.class, "left_extender");
+        leftShoulder  = hardwareMap.get(DcMotor.class, "left_shoulder");
+        leftExtender  = hardwareMap.get(DcMotor.class, "left_extender");
         rightShoulder = hardwareMap.get(DcMotor.class, "right_shoulder");
         rightExtender = hardwareMap.get(DcMotor.class, "right_extender");
         
         //Servos
-        leftHand = hardwareMap.get(Servo.class, "left_hand");
+        leftHand  = hardwareMap.get(Servo.class, "left_hand");
         rightHand = hardwareMap.get(Servo.class, "right_hand");
 
         // ########################################################################################
@@ -137,12 +137,6 @@ public class OminWheels extends LinearOpMode {
         //Servos
         leftHand.setDirection(Servo.Direction.REVERSE);
         rightHand.setDirection(Servo.Direction.FORWARD);
-
-        // Servo variables
-        Static final double INCREMENT = 0.0;
-        Static final int CYCLEMS = 50;
-        Static final double MAX_POS = 1.0;
-        Static final double MIN_POS = 0.0;
       
         // Wait for the game to start (driver presses START)
         telemetry.addData("Status", "space", "space");
@@ -155,11 +149,23 @@ public class OminWheels extends LinearOpMode {
         while (opModeIsActive()) {
             double max;
 
+            
+            // Servo variables
+            Static final double INCREMENT = 0.0;
+            Static final int CYCLEMS = 50;
+            Static final double MAX_POS = 1.0;
+            Static final double MIN_POS = 0.0;
             // POV Mode uses left joystick to go forward & strafe, and right joystick to rotate.
-            double axial   = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value - Forward/Backward
-            double lateral =  gamepad1.right_stick_x; // Note: Strafe
-            double yaw     =  gamepad1.left_stick_x; //Note: Turn
-
+            double axial           = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value - Forward/Backward
+            double lateral         =  gamepad1.right_stick_x; // Note: Strafe
+            double yaw             =  gamepad1.left_stick_x; //Note: Turn
+            // Arms
+            boolean rightGrab      =  gamepad2.right_bumper;
+            boolean leftGrab       =  gamepad2.left_bumper;
+            float rightExtension   =  gamepad2.right_trigger;
+            float leftExtension    =  gamepad2.left_trigger;
+            float leftArmAngle     = -gamepad2.left_stick_y;
+            float rightArmAngle    = -gamepad2.right_stick_y;
             // Combine the joystick requests for each axis-motion to determine each wheel's power.
             // Set up a variable for each drive wheel to save the power level for telemetry.
             double leftFrontPower  = axial + lateral + yaw;
@@ -180,6 +186,24 @@ public class OminWheels extends LinearOpMode {
                 rightBackPower  /= max;
             }
 
+            // Hand controls
+            if (leftGrab == true){
+                leftHand.setPosition(0)
+            } else {
+                leftHand.setPosition(1)
+            }
+
+            if (rightGrab == true){
+                rightHand.setPosition(0)
+            } else {
+                rightHand.setPosition(1)
+            }
+            y
+            // Arm controls
+            robot.setMotorTarget (leftShoulder,100,leftArmAngle);
+            robot.setMotorTarget (rightShoulder,100,rightArmAngle);
+            robot.setMotorTarget (leftExtender,100,leftExtension);
+            robot.setMotorTarget (rightExtender,100,rightExtension);
             // This is test code:
             //
             // Uncomment the following code to test your motor directions.
