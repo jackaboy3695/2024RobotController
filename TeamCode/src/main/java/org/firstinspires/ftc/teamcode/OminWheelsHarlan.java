@@ -35,6 +35,8 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import java.util.List;
+import java.util.ArrayList;
 
 /*
  * This file contains an example of a Linear "OpMode".
@@ -85,10 +87,13 @@ public class OminWheels extends LinearOpMode {
     private DcMotor rightShoulder = null;
     private DcMotor rightExtender = null;
     
-    //Servos
+    //Hands
     private Servo leftHand = null;
     private Servo rightHand = null;
 
+    List<DcMotor> allMotors = new ArrayList<>();
+    List<Servo> allServos = new ArrayList<>();
+    
     @Override
     public void runOpMode() {
 
@@ -106,11 +111,23 @@ public class OminWheels extends LinearOpMode {
         leftExtender  = hardwareMap.get(DcMotor.class, "left_extender");
         rightShoulder = hardwareMap.get(DcMotor.class, "right_shoulder");
         rightExtender = hardwareMap.get(DcMotor.class, "right_extender");
+
+        allMotors.add(leftFrontDrive);
+        allMotors.add(leftBackDrive);
+        allMotors.add(rightFrontDrive);
+        allMotors.add(rightBackDrive);
+        allMotors.add(leftShoulder);
+        allMotors.add(leftExtender);
+        allMotors.add(rightShoulder);
+        allMotors.add(rightExtender);
         
         //Servos
         leftHand  = hardwareMap.get(Servo.class, "left_hand");
         rightHand = hardwareMap.get(Servo.class, "right_hand");
 
+        allServos.add(leftHand);
+        allServos.add(righttHand);
+        
         // ########################################################################################
         // !!!            IMPORTANT Drive Information. Test your motor directions.            !!!!!
         // ########################################################################################
@@ -184,21 +201,21 @@ public class OminWheels extends LinearOpMode {
                 rightFrontPower /= max;
                 leftBackPower   /= max;
                 rightBackPower  /= max;
-            }
+            } 
 
             // Hand controls
-            if (leftGrab == true){
+            if (leftGrab){
                 leftHand.setPosition(0)
             } else {
                 leftHand.setPosition(1)
             }
 
-            if (rightGrab == true){
+            if (rightGrab){
                 rightHand.setPosition(0)
             } else {
                 rightHand.setPosition(1)
             }
-            y
+            
             // Arm controls
             robot.setMotorTarget (leftShoulder,100,leftArmAngle);
             robot.setMotorTarget (rightShoulder,100,rightArmAngle);
@@ -220,6 +237,7 @@ public class OminWheels extends LinearOpMode {
             rightFrontPower = gamepad1.y ? 1.0 : 0.0;  // Y gamepad
             rightBackPower  = gamepad1.b ? 1.0 : 0.0;  // B gamepad
             */
+//^
 
             // Send calculated power to wheels
             leftFrontDrive.setPower(leftFrontPower);
@@ -228,9 +246,17 @@ public class OminWheels extends LinearOpMode {
             rightBackDrive.setPower(rightBackPower);
 
             // Show the elapsed game time and wheel power.
-            telemetry.addData("Status", "Run Time: " + runtime.toString());
-            telemetry.addData("Front left/Right", "%4.2f, %4.2f", leftFrontPower, rightFrontPower);
-            telemetry.addData("Back  left/Right", "%4.2f, %4.2f", leftBackPower, rightBackPower);
+            // telemetry.addData("Status", "Run Time: " + runtime.toString());
+            // telemetry.addData("Front left/Right", "%4.2f, %4.2f", leftFrontPower, rightFrontPower);
+            // telemetry.addData("Back  left/Right", "%4.2f, %4.2f", leftBackPower, rightBackPower);
+            
+            for (DcMotor thatMotor in allMotors){
+                telemetry.addData("MotorSpeed", thatMotor.getSpeed());
+            }
+            
+            for (Servo thatServo in allServo){
+                telemetry.addData("ServoPosition", thatServo.getSpeed());
+            }
             telemetry.update();
         }
     }}
