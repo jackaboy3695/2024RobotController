@@ -26,6 +26,7 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
 package org.firstinspires.ftc.robotcontroller.external.samples;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -35,13 +36,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import java.util.List;
 import java.util.ArrayList;
-#include <PRIZM.h>  // Include all of the instructions for Tetrix stuff
-PRIZM robot;
 
 @TeleOp(name="OminWheels 0.1", group="Linear OpMode")
-@Disabled
-public class OminWheelsJack extends LinearOpMode {
-
+    
     // Declare OpMode members for each of the 4 wheel motors, the two shoulder motors, the extender motors, and the hand servos.
     
     //Time
@@ -68,9 +65,21 @@ public class OminWheelsJack extends LinearOpMode {
     List<Servo> allServos = new ArrayList<>();
     
     @Override
-    
     public void runOpMode() {
 
+        public class AutoWithHardware extends LinearOpMode {
+
+        RobotHardware   robot      =    new RobotHardware(this);
+    
+public class OminWheelsJack extends LinearOpMode {
+
+    double drive  = 0.0;
+    double strafe = 0.0;
+    double turn   = 0.0;
+
+    double INCH_TO_TICK = 20.0; // Untested
+    double TICK_TO_INCH = 0.05; // Also untested
+   
         // Initialize the hardware variables. Note that the strings used here must correspond
         // to the names assigned during the robot configuration step on the DS or RC devices.
         
@@ -200,37 +209,3 @@ public class OminWheelsJack extends LinearOpMode {
             telemetry.update();
         }
     }}
-
-/*
-OmniWheelsJack.java
-@TeleOp(name="OminWheels 0.1", group="Linear OpMode")
-
-
-Build started at Thu Oct 17 2024 14:19:35 GMT-0700 (Pacific Daylight Time)
-org/firstinspires/ftc/teamcode/OmniWheelsJack.java line 40, column 8: ERROR: class OminWheelsJack is public, should be declared in a file named OminWheelsJack.java
-org/firstinspires/ftc/teamcode/OmniWheelsJack.java line 100, column 23: ERROR: cannot find symbol
-  symbol:   variable righttHand
-  location: class org.firstinspires.ftc.robotcontroller.external.samples.OminWheelsJack
-org/firstinspires/ftc/teamcode/OmniWheelsJack.java line 179, column 13: ERROR: cannot find symbol
-  symbol:   method setMotorTarget(com.qualcomm.robotcore.hardware.DcMotor,int,float)
-  location: class org.firstinspires.ftc.robotcontroller.external.samples.OminWheelsJack
-org/firstinspires/ftc/teamcode/OmniWheelsJack.java line 180, column 13: ERROR: cannot find symbol
-  symbol:   method setMotorTarget(com.qualcomm.robotcore.hardware.DcMotor,int,float)
-  location: class org.firstinspires.ftc.robotcontroller.external.samples.OminWheelsJack
-org/firstinspires/ftc/teamcode/OmniWheelsJack.java line 181, column 13: ERROR: cannot find symbol
-  symbol:   method setMotorTarget(com.qualcomm.robotcore.hardware.DcMotor,int,float)
-  location: class org.firstinspires.ftc.robotcontroller.external.samples.OminWheelsJack
-org/firstinspires/ftc/teamcode/OmniWheelsJack.java line 182, column 13: ERROR: cannot find symbol
-  symbol:   method setMotorTarget(com.qualcomm.robotcore.hardware.DcMotor,int,float)
-  location: class org.firstinspires.ftc.robotcontroller.external.samples.OminWheelsJack
-org/firstinspires/ftc/teamcode/OmniWheelsJack.java line 191, column 58: ERROR: cannot find symbol
-  symbol:   method getSpeed()
-  location: variable thatMotor of type com.qualcomm.robotcore.hardware.DcMotor
-org/firstinspires/ftc/teamcode/OmniWheelsJack.java line 195, column 61: ERROR: cannot find symbol
-  symbol:   method getSpeed()
-  location: variable thatServo of type com.qualcomm.robotcore.hardware.Servo
-
-Build FAILED!
-
-Build finished in 0.8 seconds
-    */
