@@ -56,20 +56,114 @@ public class RobotHardware {
         myOpMode.telemetry.addData(">", "Hardware Initialized");
         myOpMode.telemetry.update();
 
+        //Drive to sample
         robot.driveRobot (1, 0, 0);
         Sleep (INCH*60);
-        //grab sample code goes here
+        robot.driveRobot (0, 0, 0);
+        Sleep (10);
+
+        //Pick up sample
+        robot.toggleSweeper();
+        Sleep (2000);
+        robot.toggleSweeper();
+        Sleep (100);
+
+        //Turn towards net
         robot.driveRobot (0, 0, 1);
         Sleep (INCH*60);    
         robot.driveRobot (0, 0, 0);
+        Sleep (10);
+
+        //Go to net
+        robot.driveRobot (1, 0, 0);
+        Sleep (INCH*60);    
+        robot.driveRobot (0, 0, 0);
+        Sleep (10);
+        
+        //Deposit sample
         robot.liftScrew (16);
+        Sleep (2500);
+        robot.standUp(16);
         Sleep (2500);
         robot.toggleDepositDoor();
         Sleep (500);
+        robot.setScrewPower(100);
+        Sleep (500);
+        robot.setScrewPower(0);
+        Sleep (500);
+        robot.toggleDepositDoor();
+        Sleep (500);
+        robot.standUp(-16);
+        Sleep (2500);
         robot.liftScrew (-16);
         Sleep (2500);
+        
+        //Turn towards other sample
         robot.driveRobot (0, 0, 1);
         Sleep (INCH*30); 
-        
+        robot.driveRobot (0, 0, 0);
+        Sleep (10);
+
+        //Go to other sample
+        robot.driveRobot (1, 0, 0);
+        Sleep (INCH*17); 
+        robot.driveRobot (0, 0, 0);
+        Sleep (10);
+
+        //Pick up sample
+        robot.toggleSweeper();
+        Sleep (500);
+        robot.toggleSweeper();
+        Sleep (100);
+
+        //Turn back towards net
+        robot.driveRobot (0, 0, 1);
+        Sleep (INCH*60); 
+        robot.driveRobot (0, 0, 0);
+        Sleep (10); 
+
+        //Move back to net
+        robot.driveRobot (1, 0, 0);
+        Sleep (INCH*17);
+        robot.driveRobot (0, 0, 0);
+        Sleep (10); 
+
+        //Deposit other sample
+        robot.liftScrew (16);
+        Sleep (2500);
+        robot.standUp(16);
+        Sleep (2500);
+        robot.toggleDepositDoor();
+        Sleep (500);
+        robot.setScrewPower(100);
+        Sleep (500);
+        robot.setScrewPower(0);
+        Sleep (500);
+        robot.toggleDepositDoor();
+        Sleep (500);
+        robot.standUp(-16);
+        Sleep (2500);
+        robot.liftScrew (-16);
+        Sleep (2500);
+
+        //Turn towards observatory
+        robot.driveRobot (0, 0, 1);
+        Sleep (INCH*60); 
+        robot.driveRobot (0, 0, 0);
+        Sleep (10);  
+
+        //Go to observatory
+        robot.driveRobot (1, 0, 0);
+        Sleep (INCH*5.1); 
+        robot.driveRobot (0, 0, 0);
+        Sleep (10); 
+
+        //Speen
+        robot.driveRobot (0, 0, 1);
+
+        //Prevent an AI uprising
+        // if (sentience==true){
+        //     delete robot;
+        // }
     }
 }
