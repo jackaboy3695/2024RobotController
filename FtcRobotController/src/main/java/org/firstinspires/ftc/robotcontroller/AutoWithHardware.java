@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 
-var INCH = 500;
+var INCH = 82;
     
 public class RobotHardware {
     
@@ -58,57 +58,51 @@ public class RobotHardware {
 
         //Drive to sample
         robot.driveRobot (1, 0, 0);
-        Sleep (INCH*60);
+        Sleep (INCH*30);
         robot.driveRobot (0, 0, 0);
-        Sleep (10);
+        Sleep (100);
 
         //Pick up sample
         robot.toggleSweeper();
-        Sleep (2000);
+        Sleep (500);
         robot.toggleSweeper();
         Sleep (100);
 
         //Turn towards net
         robot.driveRobot (0, 0, 1);
-        Sleep (INCH*60);    
+        Sleep (INCH*30);    
         robot.driveRobot (0, 0, 0);
-        Sleep (10);
+        Sleep (100);
 
         //Go to net
         robot.driveRobot (1, 0, 0);
         Sleep (INCH*60);    
         robot.driveRobot (0, 0, 0);
-        Sleep (10);
+        Sleep (100);
         
         //Deposit sample
-        robot.liftScrew (16);
-        Sleep (2500);
-        robot.standUp(16);
-        Sleep (2500);
+        robot.liftScrew (7.5);
+        robot.standUp(7.5);
         robot.toggleDepositDoor();
-        Sleep (500);
         robot.setScrewPower(100);
-        Sleep (500);
+        Sleep (1000);
         robot.setScrewPower(0);
-        Sleep (500);
         robot.toggleDepositDoor();
-        Sleep (500);
-        robot.standUp(-16);
-        Sleep (2500);
-        robot.liftScrew (-16);
-        Sleep (2500);
+        robot.standUp(-7.5);
+        robot.liftScrew (-7.5);
+        Sleep (1000);
         
         //Turn towards other sample
         robot.driveRobot (0, 0, 1);
         Sleep (INCH*30); 
         robot.driveRobot (0, 0, 0);
-        Sleep (10);
+        Sleep (100);
 
         //Go to other sample
         robot.driveRobot (1, 0, 0);
         Sleep (INCH*17); 
         robot.driveRobot (0, 0, 0);
-        Sleep (10);
+        Sleep (100);
 
         //Pick up sample
         robot.toggleSweeper();
@@ -118,52 +112,46 @@ public class RobotHardware {
 
         //Turn back towards net
         robot.driveRobot (0, 0, 1);
-        Sleep (INCH*60); 
+        Sleep (INCH*30); 
         robot.driveRobot (0, 0, 0);
-        Sleep (10); 
+        Sleep (100); 
 
         //Move back to net
         robot.driveRobot (1, 0, 0);
-        Sleep (INCH*17);
+        Sleep (INCH*48);
         robot.driveRobot (0, 0, 0);
-        Sleep (10); 
+        Sleep (100); 
 
         //Deposit other sample
-        robot.liftScrew (16);
-        Sleep (2500);
-        robot.standUp(16);
-        Sleep (2500);
+        robot.liftScrew (7.5);
+        robot.standUp(7.5);
         robot.toggleDepositDoor();
-        Sleep (500);
-        robot.setScrewPower(100);
-        Sleep (500);
+        robot.setScrewPower(.75);
+        Sleep (1000);
         robot.setScrewPower(0);
-        Sleep (500);
         robot.toggleDepositDoor();
-        Sleep (500);
-        robot.standUp(-16);
-        Sleep (2500);
-        robot.liftScrew (-16);
-        Sleep (2500);
+        robot.standUp(-7.5);
+        robot.liftScrew (-7.5);
+        Sleep (1000);
 
         //Turn towards observatory
         robot.driveRobot (0, 0, 1);
-        Sleep (INCH*60); 
+        Sleep (INCH*30); 
         robot.driveRobot (0, 0, 0);
-        Sleep (10);  
+        Sleep (100);  
 
         //Go to observatory
         robot.driveRobot (1, 0, 0);
         Sleep (INCH*5.1); 
         robot.driveRobot (0, 0, 0);
-        Sleep (10); 
+        Sleep (100); 
 
         //Speen
         robot.driveRobot (0, 0, 1);
 
         //Prevent an AI uprising
-        // if (sentience==true){
-        //     delete robot;
-        // }
+            // if (sentience==true){
+            //     delete robot;
+            // }
     }
 }
